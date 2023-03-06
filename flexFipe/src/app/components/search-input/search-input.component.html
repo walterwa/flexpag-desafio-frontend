@@ -1,0 +1,112 @@
+<!-- Código para o campo de busca que já apresenta os resultados dos veículos automaticamente
+  e apresenta a opção de "consultar" valor a partir de input passado pelo usuário -->
+
+
+<div class="container">
+    <div class="row g-4">
+
+        <div class="col-sm">
+            <label for="type">Tipo de Veículo</label>
+            <select name="types" placeholder="Tipos" class="form-select" id="types" aria-label="Seleção Tipos"
+                [(ngModel)]="type" (ngModelChange)="getMarcas()">
+                <option [ngValue]="null" disabled>Selecione o Tipo de Veículo</option>
+                <option *ngFor="let tipo of types" [value]="tipo"> {{ tipo }}</option>
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <label for="marcas">Marca</label>
+            <select name="marcas" class="form-select" placeholder="Marcas" id="marcas" [(ngModel)]="codigoMarca"
+                (ngModelChange)="getModelos()" aria-label="Seleção Marca">
+                <option [ngValue]="null" disabled>Selecione a Marca</option>
+                <option *ngFor="let marca of marcas" [value]="marca.codigo">{{ marca.nome }}</option>
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <label for="modelo">Modelo</label>
+            <select name="modelo" placeholder="Selecione o Modelo" class="form-select" id="modelo"
+                aria-label="Seleção Modelo" [(ngModel)]="codigoModelo" (ngModelChange)="getAnos()">
+
+                <option [ngValue]="null" disabled>Selecione o Modelo</option>
+                <option *ngFor="let modelo of modeloVeiculos" [value]="modelo.codigo"> {{ modelo.nome}} </option>
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <label for="ano">Ano</label>
+            <select name="ano" class="form-select" id="ano" aria-label="Seleção Ano" [(ngModel)]="codigoAno"
+                (ngModelChange)="getVeiculo()">
+                <option [ngValue]="null" disabled>Selecione o Ano</option>
+                <option *ngFor="let ano of anos" [value]="ano.codigo"> {{ ano.codigo }} </option>
+            </select>
+        </div>
+    </div>
+
+    <br>
+
+    <form class="row gy-1 gx-2 align-items-center">
+
+        <!-- implementar  os calculos de comparação do preço do vendedor com a tabela fipe -->
+        <div class="col-auto">
+            <label for="vvf">Valor de Venda</label>
+
+            <div class="input-group">
+                <span class="input-group-text">R$</span>
+                <input type="number" class="form-control" id="vvf" aria-label="Valor informado pelo usuário"
+                    (keyup)="onKeyUp($event)" />
+
+                <!-- Adicionar onClicK() e depois botar no arquivo correspondente -->
+                <button type="submit" class="btn btn-primary col-3 mx-auto ms-4" (click)="onClick()"
+                    (ngModelChange)="onClick()">Consultar</button>
+
+
+            </div>
+        </div>
+    </form>
+
+
+    <br>
+    <br>
+    <div  *ngIf="consultar" [(ngModel)]="codigoAno">
+    
+        <div  *ngIf="veiculo" class="container gx-1 gy-1">
+            <h2>Resultados da Busca</h2>
+    
+            <!-- implementar o ngIf consultar também! -->
+            <!-- Implementar coleta  das imagens-->
+            <p>Marca: {{ veiculo.Marca }} </p>
+            <p>Modelo: {{ veiculo.Modelo }} </p>
+            <p>Ano: {{ veiculo.AnoModelo }}</p>
+            <p>Combustível: {{ veiculo.Combustivel }}</p>
+            <p>Mês de Referência: {{ veiculo.MesReferencia }} </p>
+    
+            <div class="text-end container gx-2 gy-1">
+                <p>Comparativa de Preços:</p>
+
+                <!-- <p id="comparacaoPercentual">
+                    
+                </p> -->
+                <p>
+                    {{ comparacaoPercentual }}
+                </p>
+
+                <h4>Preço Tabela Fipe: {{veiculo.Valor}} </h4>
+                <p>Preço do Veículo: {{ valorAtual | currency: 'BRL'}}</p>
+
+
+                <p> {{ resultadoPercentual | number: '1.1-2' }} %</p>
+    
+    
+            </div>
+    
+        </div>
+    
+    </div>
+   <div id="comparacaoPercentual" class="text-end"> 
+        
+    </div>
+    
+
+
+</div>
