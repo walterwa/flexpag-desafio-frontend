@@ -22,6 +22,6 @@ import { TitleCasePipe } from '@angular/common';
     FormsModule
   ],
   providers: [TitleCasePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, SearchInputComponent]
 })
 export class AppModule { }

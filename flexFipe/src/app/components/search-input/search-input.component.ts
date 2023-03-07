@@ -45,6 +45,10 @@ export class SearchInputComponent {
   //comparação dos valores e se está "acima"/"abaixo" ou "igual" ao preço da tabela FIPE
   resultadoPercentual: number = 0;
   comparacaoPercentual: string = '';
+  cor1 = false;
+  cor2 = false;
+  cor3 = false;
+  
 
   valorAtual: string = ''; 
   
@@ -125,24 +129,27 @@ export class SearchInputComponent {
     console.log(`Variável vvf onClick ${ typeof this.vvf }`);
 
 
-    //valor percentual
+    //valor percentual e alguns testes
     this.resultadoPercentual = (((this.vvd - this.vvf) / this.vvf))*100;
     console.log(`L126 VVD onClick ${ typeof this.vvd } `);
     console.log(`Variável veiculo.ValorNumerico onClick ${ typeof this.vvf }`);
     console.log(`Resultado percentual é: ${ this.resultadoPercentual } % `);
     
     //Adicionando o resultado da comparacaoPercentual, 
-      //variável que está sendo rendeizada em search-input
+      //variável que está sendo renderizada em search-input
     if (this.vvd > this.vvf) {
       this.comparacaoPercentual = "O valor está acima da tabela FIPE";
+      this.cor1 = true;
     } 
     else if (this.vvd < this.vvf) {
       this.comparacaoPercentual = "O valor está abaixo da tabela FIPE";
+      this.cor2 = true;
     } 
     else {
       this.comparacaoPercentual = "O valor está igual da tabela FIPE";
+      this.cor3 = true;
     }
     
-    return this.resultadoPercentual;
+    return this.comparacaoPercentual;
   }
 }

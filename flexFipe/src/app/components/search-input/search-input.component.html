@@ -3,9 +3,9 @@
 
 
 <div class="container">
-    <div class="row g-4">
+    <div class="row">
 
-        <div class="col-sm">
+        <div class="col">
             <label for="type">Tipo de Veículo</label>
             <select name="types" placeholder="Tipos" class="form-select" id="types" aria-label="Seleção Tipos"
                 [(ngModel)]="type" (ngModelChange)="getMarcas()">
@@ -14,7 +14,7 @@
             </select>
         </div>
 
-        <div class="col-sm">
+        <div class="col">
             <label for="marcas">Marca</label>
             <select name="marcas" class="form-select" placeholder="Marcas" id="marcas" [(ngModel)]="codigoMarca"
                 (ngModelChange)="getModelos()" aria-label="Seleção Marca">
@@ -23,7 +23,7 @@
             </select>
         </div>
 
-        <div class="col-sm">
+        <div class="col">
             <label for="modelo">Modelo</label>
             <select name="modelo" placeholder="Selecione o Modelo" class="form-select" id="modelo"
                 aria-label="Seleção Modelo" [(ngModel)]="codigoModelo" (ngModelChange)="getAnos()">
@@ -33,7 +33,7 @@
             </select>
         </div>
 
-        <div class="col-sm">
+        <div class="col">
             <label for="ano">Ano</label>
             <select name="ano" class="form-select" id="ano" aria-label="Seleção Ano" [(ngModel)]="codigoAno"
                 (ngModelChange)="getVeiculo()">
@@ -45,21 +45,20 @@
 
     <br>
 
-    <form class="row gy-1 gx-2 align-items-center">
+    <form class="row">
 
         <!-- implementar  os calculos de comparação do preço do vendedor com a tabela fipe -->
-        <div class="col-auto">
+        <div class="col">
             <label for="vvf">Valor de Venda</label>
 
             <div class="input-group">
                 <span class="input-group-text">R$</span>
                 <input type="number" class="form-control" id="vvf" aria-label="Valor informado pelo usuário"
-                    (keyup)="onKeyUp($event)"
-                    [ngModel]=" valorAtual| currency: 'realBRL'" />
+                    (keyup)="onKeyUp($event)" [ngModel]=" valorAtual| currency: 'realBRL'" />
 
                 <!-- Adicionar onClicK() e depois botar no arquivo correspondente -->
-                <button type="submit" class="btn btn-primary col-3 mx-auto ms-4" (click)="onClick()"
-                    (ngModelChange)="onClick()">Consultar</button>
+                <button type="submit" class="btn btn-primary col-3 mx-auto ms-4" 
+                (click)="onClick()" (ngModelChange)="onClick()">Consultar</button>
 
 
             </div>
@@ -69,44 +68,49 @@
 
     <br>
     <br>
-    <div  *ngIf="consultar" [(ngModel)]="codigoAno">
-    
-        <div  *ngIf="veiculo" class="container gx-1 gy-1">
-            <h2>Resultados da Busca</h2>
-    
-            <!-- implementar o ngIf consultar também! -->
-            <!-- Implementar coleta  das imagens-->
-            <p>Marca: {{ veiculo.Marca }} </p>
-            <p>Modelo: {{ veiculo.Modelo }} </p>
-            <p>Ano: {{ veiculo.AnoModelo }}</p>
-            <p>Combustível: {{ veiculo.Combustivel }}</p>
-            <p>Mês de Referência: {{ veiculo.MesReferencia }} </p>
-    
-            <div class="text-end container gx-2 gy-1">
-                <p>Comparativa de Preços:</p>
 
-                <!-- <p id="comparacaoPercentual">
-                    
-                </p> -->
-                <p>
-                    {{ comparacaoPercentual }}
-                </p>
+    <div class="container">
 
-                <h4>Preço Tabela Fipe: {{veiculo.Valor}} </h4>
-                <p>Preço do Veículo: {{ valorAtual | currency: 'BRL':true}}</p>
+        <div class="row" *ngIf="consultar" [(ngModel)]="codigoAno">
 
-                <p> {{ resultadoPercentual | number: '1.1-2' }} %</p>
-    
-    
+            <div class="col" *ngIf="veiculo">
+
+                <h2>Resultados da Busca</h2>
+                <br>
+
+                <p><strong>Marca:</strong> {{ veiculo.Marca }} </p>
+                <p><strong>Modelo:</strong> {{ veiculo.Modelo }} </p>
+                <p><strong>Ano:</strong> {{ veiculo.AnoModelo }}</p>
+                <p><strong>Combustível:</strong> {{ veiculo.Combustivel }}</p>
+                <p><strong>Mês de Referência:</strong> {{ veiculo.MesReferencia }} </p>
+
             </div>
-    
+            <div class="col text-end" *ngIf="veiculo">
+
+                <br>
+                <p><strong>Comparativa de Preços</strong></p>
+
+
+                <p><strong>Preço Tabela Fipe:</strong> {{veiculo.Valor}} </p>
+                <p><strong>Preço do Veículo:</strong> {{ valorAtual | currency: 'BRL':true}}</p>
+
+
+            </div>
+            <div class="row text-center" *ngIf="veiculo">
+
+                <!-- <h1> {{ resultadoPercentual | number: '1.1-2' }} %</h1> -->
+                <h2 *ngIf="cor1" style="color:red" class="vermelho"> {{ comparacaoPercentual}} <br> {{
+                    resultadoPercentual | number: '1.1-2' }} %</h2>
+                <h2 *ngIf="cor2" style="color:green" [ngStyle]="{'text-color': 'green'}"> {{ comparacaoPercentual }}
+                    <br> {{ resultadoPercentual | number: '1.1-2' }} %</h2>
+                <h2 *ngIf="cor3" style="color: yellow" [ngStyle]="{'text-color': 'yellow'}"> {{ comparacaoPercentual }}
+                    <br> {{ resultadoPercentual | number: '1.1-2' }} %</h2>
+
+
+            </div>
+
+
         </div>
-    
-    </div>
-   <div id="comparacaoPercentual" class="text-end"> 
-        
-    </div>
-    
 
-
+    </div>
 </div>

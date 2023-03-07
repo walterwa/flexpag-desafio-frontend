@@ -5,9 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  { 
+export class AppComponent  {
+  title(title: 'App component') {
+    throw new Error('Method not implemented.');
+  } 
   constructor(
-    //private resultService: ResultService
+  
   ) {}
 
 
