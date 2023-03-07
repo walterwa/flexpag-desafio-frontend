@@ -9,6 +9,7 @@ import { ModeloAno, ModeloVeiculo, AnoVeiculo } from '../../models/modelo';
 import { ResultService } from '../../services/result.service';
 import { NgModel } from '@angular/forms';
 import { TitleCasePipe } from '@angular/common';
+import { realMoeda } from 'src/app/pipes/brl.pipe';
 
 @Component({
   selector: 'app-search-input',

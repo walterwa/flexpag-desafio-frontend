@@ -80,17 +80,6 @@ export class ResultService extends  Veiculo {
       }),
         tap((result: Veiculo) => {
           subject.next(result)
-
-          //tentativa de tratar o dado VALOR na entrada, para que ele se tornasse um tipo number
-          // subject.next(result);
-          // console.log(`Result: Valor  ${ result.Valor.slice(3, -1).replaceAll('.', '').replace(',', '.') }`);
-          //   const valor = parseInt(result.Valor.slice(3, -1).replaceAll('.', '').replace(',', '.'));
-          //   console.log(typeof valor);
-          //   console.log(`Este é o valor: ${valor}`);
-          //   //const valor = Number(result.Valor.substr(3));
-          //   this.setValorNumerico(valor);
-          //   this.setValor({...result, setValorNumerico: valor });
-          //   console.log(`teste Valor numérico  pós getVeiculo ${this.ValorNumerico}`);
         })
       ).subscribe();
       return subject;

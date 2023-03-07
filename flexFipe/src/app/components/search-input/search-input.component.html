@@ -54,7 +54,8 @@
             <div class="input-group">
                 <span class="input-group-text">R$</span>
                 <input type="number" class="form-control" id="vvf" aria-label="Valor informado pelo usuário"
-                    (keyup)="onKeyUp($event)" />
+                    (keyup)="onKeyUp($event)"
+                    [ngModel]=" valorAtual| currency: 'realBRL'" />
 
                 <!-- Adicionar onClicK() e depois botar no arquivo correspondente -->
                 <button type="submit" class="btn btn-primary col-3 mx-auto ms-4" (click)="onClick()"
@@ -92,8 +93,7 @@
                 </p>
 
                 <h4>Preço Tabela Fipe: {{veiculo.Valor}} </h4>
-                <p>Preço do Veículo: {{ valorAtual | currency: 'BRL'}}</p>
-
+                <p>Preço do Veículo: {{ valorAtual | currency: 'BRL':true}}</p>
 
                 <p> {{ resultadoPercentual | number: '1.1-2' }} %</p>
     
